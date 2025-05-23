@@ -1,0 +1,4 @@
+- elevation style property to add shadow on android
+- shadowColor, shadowOpacity, shadowRadius, shadowOffeset for IOS
+
+- 
