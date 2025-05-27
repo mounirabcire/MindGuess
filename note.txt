@@ -1,4 +1,8 @@
 - elevation style property to add shadow on android
 - shadowColor, shadowOpacity, shadowRadius, shadowOffeset for IOS
 
-- 
+- new TextInput property as autComplete, keyboardType, autoCorrect
+- use expo package for LinearGradient
+- using keyboard RN obj, as keyboard.dismiss()
+
+- how to work with ImageBackground components and it's diff props (resizeMode, imageStyle, source)
