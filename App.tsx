@@ -1,11 +1,24 @@
-import { ImageBackground, StyleSheet } from "react-native";
+import { useState } from "react";
+import { ImageBackground, SafeAreaView, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-import StartGame from "./screens/startGame.screen";
+import StartGame from "./screens/StartGame.screen";
+import MiddleGame from "./screens/MiddleGame.screen";
 
 const diceBg = require("./assets/images/dices.jpg");
 
 export default function App() {
+    const [pickedNumber, setPickedNumber] = useState<number | null>(null);
+
+    let screen;
+    pickedNumber
+        ? (screen = <MiddleGame />)
+        : (screen = <StartGame onPickNumber={setPickedNumber} />);
+
+    // let screen = <StartGame onPickNumber={setPickedNumber} />;
+    // if(pickedNumber)
+    //     screen = <MiddleGame />
+
     return (
         <LinearGradient
             style={styles.appContainer}
@@ -17,7 +30,9 @@ export default function App() {
                 resizeMode="cover"
                 imageStyle={styles.bgImageStyle}
             >
-                <StartGame />
+                <SafeAreaView style={styles.appContainer}>
+                    {screen}
+                </SafeAreaView>
             </ImageBackground>
         </LinearGradient>
     );
