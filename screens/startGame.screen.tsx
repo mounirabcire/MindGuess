@@ -1,18 +1,41 @@
 import { useState } from "react";
-import { Keyboard, StyleSheet, TextInput, View } from "react-native";
+import { Alert, Keyboard, StyleSheet, TextInput, View } from "react-native";
 
 import Button from "../components/Button";
 
+interface StartGameI {
+    onPickNumber: React.Dispatch<React.SetStateAction<number | null>>;
+}
+
 const DEF_INP = "00";
 
-function StartGame() {
+function StartGame({ onPickNumber }: StartGameI) {
     const [input, setInput] = useState<string | undefined>(DEF_INP);
 
     const handleChangeInput = (text: string) => {
         setInput(text);
     };
 
-    const handleGuessBtn = () => {};
+    const handleGuessBtn = () => {
+        const enteredNumber = parseInt(input as string);
+
+        if (isNaN(enteredNumber) || enteredNumber <= 0 || enteredNumber > 99) {
+            Alert.alert(
+                "Invalid Number!",
+                "The number has to be between 1 and 99.",
+                [
+                    {
+                        text: "Okay",
+                        style: "destructive",
+                        onPress: () => setInput(""),
+                    },
+                ]
+            );
+            return;
+        }
+
+        onPickNumber(enteredNumber);
+    };
 
     const handleResetBtn = () => {
         setInput(DEF_INP);
@@ -32,7 +55,9 @@ function StartGame() {
                 clearTextOnFocus={true}
             />
             <View style={styles.btnContainer}>
-                <Button type="primary">Guess</Button>
+                <Button type="primary" onGuess={handleGuessBtn}>
+                    Guess
+                </Button>
                 <Button type="secondary" onReset={handleResetBtn}>
                     Reset
                 </Button>
