@@ -6,3 +6,5 @@
 - using keyboard RN obj, as keyboard.dismiss()
 
 - how to work with ImageBackground components and it's diff props (resizeMode, imageStyle, source)
+- how to use Alert RN
+- using the SaveAreaView compo (for devices who has notches)
