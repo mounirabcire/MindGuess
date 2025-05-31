@@ -7,16 +7,12 @@ interface ButtonI {
     onGuess?: () => void;
 }
 
-function Button({ children, type, onReset }: ButtonI) {
-    const handleGuessBtn = () => {
-        console.log("Pressed!");
-    };
-
+function Button({ children, type, onReset, onGuess }: ButtonI) {
     if (type === "primary")
         return (
             <View style={[styles.outerButton, styles.OuterPButton]}>
                 <Pressable
-                    onPress={handleGuessBtn}
+                    onPress={onGuess}
                     android_ripple={{ color: "#219fb3" }}
                     style={({ pressed }) =>
                         pressed
