@@ -1,7 +1,15 @@
 import { useState } from "react";
-import { Alert, Keyboard, StyleSheet, TextInput, View } from "react-native";
+import {
+    Alert,
+    Keyboard,
+    StyleSheet,
+    Text,
+    TextInput,
+    View,
+} from "react-native";
 
-import Button from "../components/Button";
+import Button from "../components/ui/Button";
+import colors from "../utils/colors";
 
 interface StartGameI {
     onPickNumber: React.Dispatch<React.SetStateAction<number | null>>;
@@ -44,6 +52,7 @@ function StartGame({ onPickNumber }: StartGameI) {
 
     return (
         <View style={styles.inputContainer}>
+            <Text style={styles.text}>Enter a number</Text>
             <TextInput
                 style={styles.inputNumber}
                 keyboardType="number-pad"
@@ -69,9 +78,8 @@ function StartGame({ onPickNumber }: StartGameI) {
 const styles = StyleSheet.create({
     inputContainer: {
         marginInline: 16,
-        marginTop: 80,
         padding: 16,
-        backgroundColor: "#1f8f9e",
+        backgroundColor: colors["green-800"],
         borderRadius: 20,
         elevation: 4,
         shadowColor: "gray",
@@ -87,8 +95,8 @@ const styles = StyleSheet.create({
 
     inputNumber: {
         borderBottomWidth: 2,
-        borderBottomColor: "#E6E6EA",
-        color: "#E6E6EA",
+        borderBottomColor: colors.white,
+        color: colors.white,
         fontSize: 32,
         width: 60,
         textAlign: "center",
@@ -98,6 +106,11 @@ const styles = StyleSheet.create({
     btnContainer: {
         flexDirection: "row",
         gap: 16,
+    },
+
+    text: {
+        fontSize: 20,
+        color: colors.white,
     },
 });
 
