@@ -1,23 +1,30 @@
 import { useState } from "react";
-import { ImageBackground, SafeAreaView, StyleSheet } from "react-native";
+import { ImageBackground, SafeAreaView, StyleSheet, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import StartGame from "./screens/StartGame.screen";
 import MiddleGame from "./screens/MiddleGame.screen";
+import EndGame from "./screens/EndGame.screen";
+import Title from "./components/ui/Title";
 
 const diceBg = require("./assets/images/dices.jpg");
 
 export default function App() {
     const [pickedNumber, setPickedNumber] = useState<number | null>(null);
+    const [isGameOver, setIsGameOver] = useState(false);
 
     let screen;
+
     pickedNumber
-        ? (screen = <MiddleGame />)
+        ? (screen = (
+              <MiddleGame
+                  userNumber={pickedNumber}
+                  onGameOver={() => setIsGameOver(true)}
+              />
+          ))
         : (screen = <StartGame onPickNumber={setPickedNumber} />);
 
-    // let screen = <StartGame onPickNumber={setPickedNumber} />;
-    // if(pickedNumber)
-    //     screen = <MiddleGame />
+    if (isGameOver) screen = <EndGame />;
 
     return (
         <LinearGradient
@@ -30,7 +37,8 @@ export default function App() {
                 resizeMode="cover"
                 imageStyle={styles.bgImageStyle}
             >
-                <SafeAreaView style={styles.appContainer}>
+                <SafeAreaView style={[styles.appContainer, styles.safeArea]}>
+                    <Title>Guess My Number</Title>
                     {screen}
                 </SafeAreaView>
             </ImageBackground>
@@ -41,14 +49,14 @@ export default function App() {
 const styles = StyleSheet.create({
     appContainer: {
         flex: 1,
+        gap: 24,
+    },
+
+    safeArea: {
+        marginTop: 80,
     },
 
     bgImageStyle: {
         opacity: 0.2,
     },
 });
-
-// white E6E6EA
-// yellow FED766
-// blue 2AB7CA
-// red FE4A49
