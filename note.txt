@@ -8,3 +8,4 @@
 - how to work with ImageBackground components and it's diff props (resizeMode, imageStyle, source)
 - how to use Alert RN
 - using the SaveAreaView compo (for devices who has notches)
+- how to manage colors globaly (creating utils color file)
