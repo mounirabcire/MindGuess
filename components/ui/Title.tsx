@@ -1,5 +1,6 @@
-import React from "react";
 import { Text, StyleSheet } from "react-native";
+
+import colors from "../../utils/colors";
 
 interface TitleI {
     children: React.ReactNode;
@@ -13,8 +14,8 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 32,
         textAlign: "center",
-        color: "#FE4A49",
         fontWeight: 900,
+        // color: colors["green-800"],
     },
 });
 

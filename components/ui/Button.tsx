@@ -1,4 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import colors from "../../utils/colors";
 
 interface ButtonI {
     children: string;
@@ -13,7 +14,7 @@ function Button({ children, type, onReset, onGuess }: ButtonI) {
             <View style={[styles.outerButton, styles.OuterPButton]}>
                 <Pressable
                     onPress={onGuess}
-                    android_ripple={{ color: "#219fb3" }}
+                    android_ripple={{ color: colors["green-600"] }}
                     style={({ pressed }) =>
                         pressed
                             ? [styles.innerButton, styles.pressedIOS]
@@ -32,7 +33,7 @@ function Button({ children, type, onReset, onGuess }: ButtonI) {
             <View style={[styles.outerButton, styles.OuterSButton]}>
                 <Pressable
                     onPress={onReset}
-                    android_ripple={{ color: "#2d7a85" }}
+                    android_ripple={{ color: colors["green-700"] }}
                     style={({ pressed }) =>
                         pressed
                             ? [styles.innerButton, styles.pressedIOS]
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     pressedIOS: { opacity: 0.75 },
 
     OuterPButton: {
-        backgroundColor: "#2AB7CA",
+        backgroundColor: colors["green-400"],
         borderRadius: 4,
         borderColor: "transparent",
         borderWidth: 2,
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
 
     OuterSButton: {
         borderWidth: 2,
-        borderColor: "#2AB7CA",
+        borderColor: colors["green-400"],
         borderRadius: 4,
     },
 
@@ -76,11 +77,11 @@ const styles = StyleSheet.create({
     },
 
     PTextLabel: {
-        color: "#E6E6EA",
+        color: colors.white,
     },
 
     STextLabel: {
-        color: "#57def0",
+        color: colors["green-300"],
     },
 });
 
