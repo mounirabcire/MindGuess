@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import colors from "../../utils/colors";
 
 interface ButtonI {
-    children: string;
+    children: React.ReactNode;
     type: "primary" | "secondary";
     onReset?: () => void;
     onGuess?: () => void;
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 18,
         fontWeight: 600,
+        fontFamily: "open-sans",
     },
 
     PTextLabel: {
