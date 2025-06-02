@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { ImageBackground, SafeAreaView, StyleSheet, Text } from "react-native";
+import { ImageBackground, SafeAreaView, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useFonts } from "expo-font";
+import AppLoading from "expo-app-loading";
 
 import StartGame from "./screens/StartGame.screen";
 import MiddleGame from "./screens/MiddleGame.screen";
@@ -12,6 +14,13 @@ const diceBg = require("./assets/images/dices.jpg");
 export default function App() {
     const [pickedNumber, setPickedNumber] = useState<number | null>(null);
     const [isGameOver, setIsGameOver] = useState(false);
+
+    const [fontsLoaded] = useFonts({
+        "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+        "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+    });
+
+    if (!fontsLoaded) return <AppLoading />;
 
     let screen;
 
