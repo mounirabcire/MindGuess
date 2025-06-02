@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
         borderBottomColor: colors.white,
         color: colors.white,
         fontSize: 32,
+        fontFamily: "open-sans",
         width: 60,
         textAlign: "center",
         paddingBottom: 8,
@@ -111,6 +112,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 20,
         color: colors.white,
+        fontFamily: "open-sans",
     },
 });
 
