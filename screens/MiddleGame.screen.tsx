@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Alert } from "react-native";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 import Title from "../components/ui/Title";
 import NumberContainer from "../components/game/NumberContainer";
 import Button from "../components/ui/Button";
 import { generateRandomBetween } from "../utils/logic";
+import colors from "../utils/colors";
 
 interface MiddleGameI {
     userNumber: number;
@@ -56,7 +58,7 @@ function MiddleGame({ userNumber, onGameOver }: MiddleGameI) {
 
     return (
         <View style={styles.screen}>
-            <Title>Opponent's guess</Title>
+            <Title style={styles.title}>Opponent's guess</Title>
 
             <NumberContainer>{guessedNumber}</NumberContainer>
 
@@ -65,10 +67,10 @@ function MiddleGame({ userNumber, onGameOver }: MiddleGameI) {
 
                 <View style={styles.btnContainer}>
                     <Button type="primary" onGuess={higherGuessHandler}>
-                        +
+                        <AntDesign name="plus" size={24} color="white" />
                     </Button>
                     <Button type="primary" onGuess={lowerGuessHandler}>
-                        -
+                        <AntDesign name="minus" size={24} color="white" />
                     </Button>
                 </View>
             </View>
@@ -92,10 +94,16 @@ const styles = StyleSheet.create({
         gap: 16,
     },
 
+    title: {
+        fontSize: 26,
+        fontFamily: "open-sans",
+    },
+
     subText: {
         marginTop: 24,
         textAlign: "center",
-        fontSize: 24,
+        fontSize: 20,
+        fontFamily: "open-sans",
     },
 });
 
