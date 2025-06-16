@@ -7,6 +7,7 @@ import AppLoading from "expo-app-loading";
 import StartGame from "./screens/StartGame.screen";
 import MiddleGame from "./screens/MiddleGame.screen";
 import EndGame from "./screens/EndGame.screen";
+
 import Title from "./components/ui/Title";
 
 const diceBg = require("./assets/images/dices.jpg");
@@ -14,11 +15,18 @@ const diceBg = require("./assets/images/dices.jpg");
 export default function App() {
     const [pickedNumber, setPickedNumber] = useState<number | null>(null);
     const [isGameOver, setIsGameOver] = useState(false);
+    const [roundsCount, setRoundsCount] = useState(0);
 
     const [fontsLoaded] = useFonts({
         "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
         "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
     });
+
+    function handleStartNewGame() {
+        setPickedNumber(null);
+        setRoundsCount(0);
+        setIsGameOver(false);
+    }
 
     if (!fontsLoaded) return <AppLoading />;
 
@@ -33,7 +41,14 @@ export default function App() {
           ))
         : (screen = <StartGame onPickNumber={setPickedNumber} />);
 
-    if (isGameOver) screen = <EndGame />;
+    if (isGameOver)
+        screen = (
+            <EndGame
+                pickedNumber={pickedNumber as number}
+                onStartNewGame={handleStartNewGame}
+                roundsNumber={roundsCount}
+            />
+        );
 
     return (
         <LinearGradient
