@@ -20,6 +20,7 @@ function MiddleGame({ userNumber, onGameOver }: MiddleGameI) {
     const initialGuessedNumber = generateRandomBetween(1, 100, userNumber);
 
     const [guessedNumber, setGuessedNumber] = useState(initialGuessedNumber);
+    const [guessRounds, setGuessRounds] = useState([initialGuessedNumber]);
     function lowerGuessHandler() {
         // 21 > 5
         if (userNumber > guessedNumber) {
@@ -31,9 +32,14 @@ function MiddleGame({ userNumber, onGameOver }: MiddleGameI) {
 
         maxBoundary = guessedNumber;
 
-        setGuessedNumber(
-            generateRandomBetween(minBoundary, maxBoundary, guessedNumber)
+        const number = generateRandomBetween(
+            minBoundary,
+            maxBoundary,
+            guessedNumber
         );
+
+        setGuessedNumber(number);
+        setGuessRounds((prev) => [number, ...prev]);
     }
 
     function higherGuessHandler() {
@@ -47,10 +53,20 @@ function MiddleGame({ userNumber, onGameOver }: MiddleGameI) {
 
         minBoundary = guessedNumber;
 
-        setGuessedNumber(
-            generateRandomBetween(minBoundary, maxBoundary, guessedNumber)
+        const number = generateRandomBetween(
+            minBoundary,
+            maxBoundary,
+            guessedNumber
         );
+
+        setGuessedNumber(number);
+        setGuessRounds((prev) => [number, ...prev]);
     }
+
+    useEffect(() => {
+        minBoundary = 1;
+        maxBoundary = 100;
+    }, []);
 
     useEffect(() => {
         if (userNumber === guessedNumber) onGameOver();
@@ -75,7 +91,9 @@ function MiddleGame({ userNumber, onGameOver }: MiddleGameI) {
                 </View>
             </View>
             <View>
-                <Text>Log rounds</Text>
+                {guessRounds.map((num) => (
+                    <Text key={num}>{num}</Text>
+                ))}
             </View>
         </View>
     );
