@@ -12,3 +12,5 @@
 
 - typing props style e.g. {style: StyleProp<TextStyle>;}
 - how to work with custom fonts with help of expo-font package and using expo-app-loading package
+
+- we can nest the Text compo into Text compo
