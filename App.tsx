@@ -28,6 +28,11 @@ export default function App() {
         setIsGameOver(false);
     }
 
+    function handleGameOver(roundsCount: number) {
+        setIsGameOver(true);
+        setRoundsCount(roundsCount);
+    }
+
     if (!fontsLoaded) return <AppLoading />;
 
     let screen;
@@ -36,7 +41,7 @@ export default function App() {
         ? (screen = (
               <MiddleGame
                   userNumber={pickedNumber}
-                  onGameOver={() => setIsGameOver(true)}
+                  onGameOver={handleGameOver}
               />
           ))
         : (screen = <StartGame onPickNumber={setPickedNumber} />);
