@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, FlatList } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 import Title from "../components/ui/Title";
@@ -7,10 +7,11 @@ import NumberContainer from "../components/game/NumberContainer";
 import Button from "../components/ui/Button";
 import { generateRandomBetween } from "../utils/logic";
 import colors from "../utils/colors";
+import GuessLogItem from "../components/game/GuessLogItem";
 
 interface MiddleGameI {
     userNumber: number;
-    onGameOver: () => void;
+    onGameOver: (roundsCount: number) => void;
 }
 
 let minBoundary = 1;
@@ -21,6 +22,9 @@ function MiddleGame({ userNumber, onGameOver }: MiddleGameI) {
 
     const [guessedNumber, setGuessedNumber] = useState(initialGuessedNumber);
     const [guessRounds, setGuessRounds] = useState([initialGuessedNumber]);
+
+    const totalRounds = guessRounds.length;
+
     function lowerGuessHandler() {
         // 21 > 5
         if (userNumber > guessedNumber) {
@@ -69,7 +73,7 @@ function MiddleGame({ userNumber, onGameOver }: MiddleGameI) {
     }, []);
 
     useEffect(() => {
-        if (userNumber === guessedNumber) onGameOver();
+        if (userNumber === guessedNumber) onGameOver(guessRounds.length);
     }, [userNumber, guessedNumber]);
 
     return (
@@ -90,10 +94,17 @@ function MiddleGame({ userNumber, onGameOver }: MiddleGameI) {
                     </Button>
                 </View>
             </View>
-            <View>
-                {guessRounds.map((num) => (
-                    <Text key={num}>{num}</Text>
-                ))}
+            <View style={styles.listContainer}>
+                <FlatList
+                    data={guessRounds}
+                    renderItem={({ item, index }) => (
+                        <GuessLogItem
+                            roundNumber={totalRounds - index}
+                            guess={item}
+                        />
+                    )}
+                    keyExtractor={(item) => item.toString()}
+                />
             </View>
         </View>
     );
@@ -122,6 +133,12 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 20,
         fontFamily: "open-sans",
+    },
+
+    listContainer: {
+        flex: 1,
+        padding: 16,
+        paddingBottom: 28,
     },
 });
 
