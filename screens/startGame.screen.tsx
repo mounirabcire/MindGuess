@@ -6,6 +6,9 @@ import {
     Text,
     TextInput,
     View,
+    Dimensions,
+    ScrollView,
+    KeyboardAvoidingView,
 } from "react-native";
 
 import Button from "../components/ui/Button";
@@ -16,6 +19,7 @@ interface StartGameI {
 }
 
 const DEF_INP = "00";
+const deviceWidth = Dimensions.get("window").width;
 
 function StartGame({ onPickNumber }: StartGameI) {
     const [input, setInput] = useState<string | undefined>(DEF_INP);
@@ -51,34 +55,42 @@ function StartGame({ onPickNumber }: StartGameI) {
     };
 
     return (
-        <View style={styles.inputContainer}>
-            <Text style={styles.text}>Enter a number</Text>
-            <TextInput
-                style={styles.inputNumber}
-                keyboardType="number-pad"
-                maxLength={2}
-                autoCapitalize="none"
-                autoCorrect={false}
-                value={input}
-                onChangeText={handleChangeInput}
-                clearTextOnFocus={true}
-            />
-            <View style={styles.btnContainer}>
-                <Button type="primary" onGuess={handleGuessBtn}>
-                    Guess
-                </Button>
-                <Button type="secondary" onReset={handleResetBtn}>
-                    Reset
-                </Button>
-            </View>
-        </View>
+        <ScrollView style={styles.screen}>
+            <KeyboardAvoidingView style={styles.screen} behavior="position">
+                <View style={styles.inputContainer}>
+                    <Text style={styles.text}>Enter a number</Text>
+                    <TextInput
+                        style={styles.inputNumber}
+                        keyboardType="number-pad"
+                        maxLength={2}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        value={input}
+                        onChangeText={handleChangeInput}
+                        clearTextOnFocus={true}
+                    />
+                    <View style={styles.btnContainer}>
+                        <Button type="primary" onGuess={handleGuessBtn}>
+                            Guess
+                        </Button>
+                        <Button type="secondary" onReset={handleResetBtn}>
+                            Reset
+                        </Button>
+                    </View>
+                </View>
+            </KeyboardAvoidingView>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
+    screen: {
+        flex: 1,
+    },
+
     inputContainer: {
         marginInline: 16,
-        padding: 16,
+        padding: deviceWidth < 380 ? 8 : 16,
         backgroundColor: colors["green-800"],
         borderRadius: 20,
         elevation: 4,
