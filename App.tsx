@@ -3,6 +3,7 @@ import { ImageBackground, SafeAreaView, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
+import { StatusBar } from "expo-status-bar";
 
 import StartGame from "./screens/StartGame.screen";
 import MiddleGame from "./screens/MiddleGame.screen";
@@ -56,22 +57,27 @@ export default function App() {
         );
 
     return (
-        <LinearGradient
-            style={styles.appContainer}
-            colors={["#6eeafa", "#E6E6EA"]}
-        >
-            <ImageBackground
+        <>
+            <StatusBar style="dark" />
+            <LinearGradient
                 style={styles.appContainer}
-                source={diceBg}
-                resizeMode="cover"
-                imageStyle={styles.bgImageStyle}
+                colors={["#6eeafa", "#E6E6EA"]}
             >
-                <SafeAreaView style={[styles.appContainer, styles.safeArea]}>
-                    <Title>Guess My Number</Title>
-                    {screen}
-                </SafeAreaView>
-            </ImageBackground>
-        </LinearGradient>
+                <ImageBackground
+                    style={styles.appContainer}
+                    source={diceBg}
+                    resizeMode="cover"
+                    imageStyle={styles.bgImageStyle}
+                >
+                    <SafeAreaView
+                        style={[styles.appContainer, styles.safeArea]}
+                    >
+                        <Title>Guess My Number</Title>
+                        {screen}
+                    </SafeAreaView>
+                </ImageBackground>
+            </LinearGradient>
+        </>
     );
 }
 
