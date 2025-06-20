@@ -14,3 +14,13 @@
 - how to work with custom fonts with help of expo-font package and using expo-app-loading package
 
 - we can nest the Text compo into Text compo
+
+
+- for dynamic widths we can use, percentages for maxWidth or minWidth or using Dimesions Api (runs once one the file is loaded) from RN
+- by default we can't see the app on landscape mode cuz on app.json file, 
+the orientation property is set to portrait we can set it to landscape or default
+- we can use useDiminsionWidht hook to wath the width and hight values and whenerver they change the componnet re-render
+- using keyboardAvoidingView componnet
+- using Platform to write code specifc Platform (Platform.OS ===  or Platform.select({ios: , android}))
+- for files we could use Compo.ios.tsx and Compo.android.tsx, the file imported should be like this "../components/Compo"
+- using StatusBar
