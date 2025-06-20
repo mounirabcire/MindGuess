@@ -1,6 +1,4 @@
-import { Text, StyleSheet, StyleProp, TextStyle } from "react-native";
-
-import colors from "../../utils/colors";
+import { Text, StyleSheet, StyleProp, TextStyle, Platform } from "react-native";
 
 interface TitleI {
     children: React.ReactNode;
@@ -13,10 +11,9 @@ function Title({ children, style }: TitleI) {
 
 const styles = StyleSheet.create({
     title: {
-        fontSize: 32,
+        fontSize: Platform.OS === "android" ? 32 : 28,
         textAlign: "center",
         fontFamily: "open-sans-bold",
-        // color: colors["green-800"],
     },
 });
 
